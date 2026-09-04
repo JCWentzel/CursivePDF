@@ -1,46 +1,47 @@
-# CursivePDF
+<p align="center">
+  <img src="static/logo.svg" alt="CursivePDF logo" width="104" />
+</p>
 
-CursivePDF is a cross-platform desktop app for adding a handwriting layer on top of PDF documents. The project is set up with SvelteKit, TypeScript, Vite, and Tauri v2.
+<h1 align="center">CursivePDF</h1>
 
-## Goal
+<p align="center">
+  A cross-platform PDF handwriting app for adding tablet-friendly ink on top of documents.
+</p>
 
-The editor will render the source PDF underneath a separate ink layer. Tablet, pen, touch, and mouse input will be captured into page-relative stroke data so handwriting stays aligned while zooming, scrolling, rotating, saving, and exporting.
+<p align="center">
+  <img src="Images/CursivePDFScreenShot.png" alt="CursivePDF app screenshot" />
+</p>
 
-On export, the ink layer should be written after the original page content so it appears above all existing PDF elements.
+## About
 
-## Current MVP
+CursivePDF is a desktop app for marking up PDF documents with a dedicated handwriting layer. It is built for pen tablets, styluses, touch screens, and mouse input, with the ink rendered above the original PDF page content.
 
-- Open PDF files with the native Tauri dialog
-- Render PDF pages with PDF.js
-- Preview pages as thumbnails in the side panel
-- Draw an always-on-top ink layer with pen, touch, or mouse input
-- Preserve pressure data from pointer events when available
-- Tune pen smoothing, stroke width, opacity, zoom, and ink color
-- Pick from deep pen-ink colors or define one custom color slot
-- Toggle light/dark mode
-- Save user settings locally between sessions
-- Use generated Tauri app icons from the red folded-document CursivePDF logo
-- Switch pages while keeping page-specific ink
-- Undo, redo, erase whole strokes, and clear a page's ink
-- Export a new PDF with ink appended above the original page content
-- Use a browser fallback for quick Vite testing outside Tauri
+The app keeps handwriting separate while you work, then writes the ink back into an exported PDF so notes, signatures, corrections, and sketches stay visible above the original document.
 
-## Tech Stack
+## Features
 
-- SvelteKit and TypeScript for the app UI
-- Tauri v2 for the native desktop shell and packaging
-- PDF.js via `pdfjs-dist` for PDF rendering
-- `pdf-lib` for writing/exporting annotated PDFs
-- Tauri dialog and filesystem plugins for native open/save workflows
+- Open and render PDF documents locally
+- Draw with pen, touch, or mouse input
+- Keep ink page-specific while moving through a document
+- Export an annotated PDF with handwriting placed above original page content
+- Preview page thumbnails in the side panel
+- Undo, redo, erase strokes, and clear a page's ink
+- Choose deep pen-style ink colors
+- Set one custom ink color
+- Adjust stroke width, opacity, zoom, and pen smoothing
+- Toggle light and dark mode
+- Save user preferences between sessions
 
-## Prerequisites
+## Status
 
-- Node.js
-- pnpm
-- Rust and Cargo
-- Tauri OS prerequisites for your platform
+CursivePDF is currently in early release-candidate development. The core PDF annotation workflow is working, but the app should still be tested carefully before using it for critical documents.
 
-Tauri's current prerequisite guide is here: https://tauri.app/start/prerequisites/
+## Built With
+
+- [SvelteKit](https://svelte.dev/docs/kit) and TypeScript for the interface
+- [Tauri v2](https://tauri.app/) for the desktop shell
+- [PDF.js](https://mozilla.github.io/pdf.js/) for PDF rendering
+- [pdf-lib](https://pdf-lib.js.org/) for PDF export
 
 ## Development
 
@@ -50,13 +51,13 @@ Install dependencies:
 pnpm install
 ```
 
-Run the Svelte development server:
+Run the browser development server:
 
 ```sh
 pnpm dev
 ```
 
-Run the desktop app:
+Run the desktop app in development:
 
 ```sh
 pnpm tauri dev
@@ -74,27 +75,18 @@ Build the frontend:
 pnpm build
 ```
 
-Build a desktop bundle:
+Build the desktop app and installers:
 
 ```sh
 pnpm tauri build
 ```
 
-Successful Windows builds are written under:
+Windows build outputs are written under:
 
-```sh
+```text
 src-tauri/target/release/
 src-tauri/target/release/bundle/
 ```
-
-## Planned Project Shape
-
-- `src/routes/+page.svelte` - editor UI and interaction wiring
-- `src/lib/files` - open/save helpers and browser fallback utilities
-- `src/lib/pdf` - PDF loading, rendering, viewport transforms
-- `src/lib/ink` - stroke model, hit testing, canvas rendering, PDF export
-- `src/lib/settings` - persisted local user preferences
-- `src-tauri` - Tauri v2 Rust shell and plugin setup
 
 ## License
 
